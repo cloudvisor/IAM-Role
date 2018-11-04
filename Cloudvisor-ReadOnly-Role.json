@@ -1,0 +1,77 @@
+{
+    "Statement": [
+        {
+            "Action": [
+                "s3:List*",
+                "s3:Get*"
+            ],
+            "Resource": [
+                  { "Fn::Join": [ "", [ "arn:aws:s3:::", { "Ref": "ClientBillingBucket" }, "/*" ] ] }
+            ],
+            "Effect": "Allow",
+            "Sid": "CloudvisorReadonlyBillingBucketAccess"
+        },
+        {
+            "Action": [
+                "organizations:DescribeAccount",
+                "budgets:ViewBudget",
+                "aws-portal:ViewBilling",
+                "autoscaling:Describe*",
+                "cloudwatch:Describe*",
+                "cloudwatch:GetMetricStatistics",
+                "cloudwatch:List*",
+                "datapipeline:Describe*",
+                "datapipeline:GetAccountLimits",
+                "datapipeline:GetPipelineDefinition",
+                "datapipeline:List*",
+                "dynamodb:Describe*",
+                "dynamodb:List*",
+                "ecs:Describe*",
+                "ecs:List*",
+                "elasticache:Describe*",
+                "elasticache:List*",
+                "elasticloadbalancing:Describe*",
+                "elasticmapreduce:Describe*",
+                "elasticmapreduce:List*",
+                "logs:Describe*",
+                "logs:List*",
+                "machinelearning:Describe*",
+                "machinelearning:List*",
+                "sqs:GetQueueAttributes",
+                "sqs:List*",
+                "iam:List*",
+                "iam:Get*",
+                "s3:HeadBucket",
+                "s3:List*",
+                "s3:GetBucketPolicy",
+                "s3:GetLifecycleConfiguration",
+                "s3:GetBucketWebsite",
+                "s3:GetBucketLogging",
+                "s3:GetBucketRequestPayment",
+                "s3:GetBucketAcl",
+                "s3:GetBucketLocation",
+                "s3:GetBucketTagging",
+                "s3:GetBucketVersioning",
+                "s3:GetEncryptionConfiguration",
+                "s3:GetMetricsConfiguration",
+                "s3:GetReplicationConfiguration",
+                "tag:GetResources",
+                "tag:GetTagKeys",
+                "tag:GetTagValues",
+                "ec2:Describe*",
+                "ec2:List*",
+                "rds:Describe*",
+                "rds:List*",
+                "rds:ListTagsForResource",
+                "redshift:Describe*",
+                "eks:Describe*",
+                "eks:List*"
+            ],
+            "Resource": [
+                "*"
+            ],
+            "Effect": "Allow",
+            "Sid": "CloudvisorReadonlyAwsAccess"
+        }
+    ]
+}
