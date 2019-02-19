@@ -1,4 +1,5 @@
 <img align="right" width="250" src="https://cloudvisor.io/assets/img/invert.svg">
+
 # Cloudvisor integration IAM Role
 
 Connecting your AWS account will enable Cloudvisor to automate cost optimization tasks on your behalf.
