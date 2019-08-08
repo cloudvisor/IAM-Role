@@ -1,0 +1,89 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "Integration IAM Role for Cloudvisor [Read Only]",
+  "Metadata": {
+    "AWS::CloudFormation::Interface": {
+      "ParameterGroups": [
+        {
+          "Label": {"default": "Cloudvior Customer Configuration"},
+          "Parameters": ["ClientUUIDToken"]
+        }
+      ],
+      "ParameterLabels": {
+        "ClientUUIDToken": {"default": "Cloudvisor Customer ID"}
+      }
+    }
+  },
+  "Parameters": {
+    "ClientUUIDToken": {
+      "Description": "[DO NOT MODIFY] The customer ID provided by Cloudvisor to indentify you as a client",
+      "Type": "String"
+    }
+  },
+  "Resources": {
+    "CloudvisorIamRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [ {
+            "Action": "sts:AssumeRole",
+            "Effect": "Allow",
+            "Condition": {
+              "StringEquals": {
+                "sts:ExternalId": { "Ref": "ClientUUIDToken" }
+              }
+            },
+            "Principal": {
+              "AWS": [
+                "arn:aws:iam::672188301118:root"
+              ]
+            }
+          } ]
+        },
+        "Policies": [ {
+          "PolicyName": "Cloudvisor-Policy",
+          "PolicyDocument": {
+            "Statement": [
+              {
+                "Sid": "CloudvisorEC2Access",
+                "Effect": "Allow",
+                "Action": [
+                  "ec2:Describe*",
+                  "ec2:List*",
+                  "tag:GetResources",
+                  "tag:GetTagKeys",
+                  "tag:GetTagValues",
+                  "autoscaling:Describe*",
+                  "elasticloadbalancing:Describe*"
+                ],
+                "Resource": [
+                  "*"
+                ]
+              },
+              {
+                "Sid": "CloudvisorReadonlyGeneralAccess",
+                "Effect": "Allow",
+                "Action": [
+                  "organizations:DescribeAccount",
+                  "cloudwatch:List*",
+                  "cloudwatch:Describe*",
+                  "cloudwatch:GetMetricStatistics",
+                  "ce:*"
+                ],
+                "Resource": [
+                  "*"
+                ]
+              }
+            ]
+          }
+        }]
+      }
+    }
+  },
+  "Outputs": {
+    "CloudvisorRoleArn": {
+      "Description": "The ARN of the role created for Cloudvisor integration",
+      "Value": { "Fn::GetAtt": ["CloudvisorIamRole", "Arn"] }
+    }
+  }
+}
