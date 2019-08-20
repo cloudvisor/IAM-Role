@@ -1,0 +1,34 @@
+{
+    "Statement": [
+        {
+            "Action": [
+                "ec2:Describe*",
+                "ec2:List*",
+                "tag:GetResources",
+                "tag:GetTagKeys",
+                "tag:GetTagValues",
+                "autoscaling:Describe*",
+                "elasticloadbalancing:Describe*"
+            ],
+            "Resource": [
+                "*"
+            ],
+            "Effect": "Allow",
+            "Sid": "CloudvisorEC2Access"
+        },
+        {
+            "Action": [
+                "organizations:DescribeAccount",
+                "cloudwatch:List*",
+                "cloudwatch:Describe*",
+                "cloudwatch:GetMetricStatistics",
+                "ce:*"
+            ],
+            "Resource": [
+                "*"
+            ],
+            "Effect": "Allow",
+            "Sid": "CloudvisorReadonlyGeneralAccess"
+        }
+    ]
+}
