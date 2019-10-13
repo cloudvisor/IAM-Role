@@ -1,0 +1,12 @@
+{
+  "Sid": "CloudvisorReadonlyBillingBucketAccess",
+  "Effect": "Allow",
+  "Action": [
+    "s3:List*",
+    "s3:Get*"
+  ],
+  "Resource": [
+    "arn:aws:s3:::ClientBillingBucket",
+    "arn:aws:s3:::ClientBillingBucket/*"
+  ]
+}
