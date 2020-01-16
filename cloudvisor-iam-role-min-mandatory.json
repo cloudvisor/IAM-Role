@@ -44,6 +44,7 @@
                 "cloudwatch:List*",
                 "cloudwatch:Describe*",
                 "cloudwatch:GetMetricStatistics",
+                "savingsplans:*",
                 "ce:*",
                 "cur:*"
             ],
