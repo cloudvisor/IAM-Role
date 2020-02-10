@@ -18,10 +18,14 @@
         },
         {
             "Action": [
-                "organizations:DescribeAccount",
+                "organizations:List*",
+                "organizations:Describe*",
                 "cloudwatch:List*",
                 "cloudwatch:Describe*",
                 "cloudwatch:GetMetricStatistics",
+                "cloudtrail:LookupEvents",
+                "savingsplans:Describe*",
+                "savingsplans:ListTagsForResource",
                 "ce:*"
             ],
             "Resource": [
