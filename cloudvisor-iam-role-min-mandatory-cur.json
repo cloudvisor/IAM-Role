@@ -1,0 +1,72 @@
+{
+    "Statement": [
+        {
+            "Sid": "CloudvisorEC2Access",
+            "Effect": "Allow",
+            "Action": [
+                "ec2:Describe*",
+                "ec2:List*",
+                "ec2:CreateReservedInstancesListing",
+                "ec2:CreateTags",
+                "ec2:DeleteTags",
+                "ec2:PurchaseReservedInstancesOffering",
+                "ec2:MonitorInstances",
+                "ec2:UnmonitorInstances",
+                "ec2:PurchaseHostReservation",
+                "ec2:ModifyInstanceCreditSpecification",
+                "ec2:GetReservedInstancesExchangeQuote",
+                "ec2:AcceptReservedInstancesExchangeQuote",
+                "ec2:CancelReservedInstancesListing",
+                "ec2:ModifyReservedInstances",
+                "tag:GetResources",
+                "tag:GetTagKeys",
+                "tag:GetTagValues",
+                "autoscaling:Describe*",
+                "autoscaling:CreateOrUpdateTags",
+                "autoscaling:DeleteTags",
+                "elasticloadbalancing:Describe*",
+                "elasticloadbalancing:RemoveTags",
+                "elasticloadbalancing:AddTags"
+            ],
+            "Resource": [
+                "*"
+            ]
+        },
+        {
+            "Sid": "CloudvisorReadonlyGeneralAccess",
+            "Effect": "Allow",
+            "Action": [
+                "organizations:List*",
+                "organizations:Describe*",
+                "cloudwatch:List*",
+                "cloudwatch:Describe*",
+                "cloudwatch:GetMetricStatistics",
+                "savingsplans:*",
+                "ce:List*",
+                "ce:Describe*",
+                "ce:Get*",
+                "cloudtrail:List*",
+                "cloudtrail:LookupEvents",
+                "cloudtrail:Describe*",
+                "cloudtrail:Get*",
+                "cur:Describe*"
+            ],
+            "Resource": [
+                "*"
+            ]
+        },
+        {
+            "Sid": "CloudvisorReadonlyBillingBucketAccess",
+            "Effect": "Allow",
+            "Action": [
+              "s3:ListBucket",
+              "s3:Get*",
+              "s3:List*"
+            ],
+            "Resource": [
+              {"Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "BillingBucketName" } ]]},
+              {"Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "BillingBucketName" }, "/*" ]]}
+            ]
+        }
+    ]
+}
