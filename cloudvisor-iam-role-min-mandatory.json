@@ -17,7 +17,6 @@
                 "ec2:GetReservedInstancesExchangeQuote",
                 "ec2:AcceptReservedInstancesExchangeQuote",
                 "ec2:CancelReservedInstancesListing",
-                "ec2:PurchaseScheduledInstances",
                 "ec2:ModifyReservedInstances",
                 "tag:GetResources",
                 "tag:GetTagKeys",
@@ -25,8 +24,6 @@
                 "autoscaling:Describe*",
                 "autoscaling:CreateOrUpdateTags",
                 "autoscaling:DeleteTags",
-                "autoscaling:DisableMetricsCollection",
-                "autoscaling:EnableMetricsCollection",
                 "elasticloadbalancing:Describe*",
                 "elasticloadbalancing:RemoveTags",
                 "elasticloadbalancing:AddTags"
@@ -45,8 +42,9 @@
                 "cloudwatch:Describe*",
                 "cloudwatch:GetMetricStatistics",
                 "savingsplans:*",
-                "ce:*",
-                "cur:*"
+                "ce:List*",
+                "ce:Describe*",
+                "ce:Get*"
             ],
             "Resource": [
                 "*"
