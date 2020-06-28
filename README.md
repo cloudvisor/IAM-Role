@@ -1,4 +1,4 @@
-<img align="right" width="250" src="https://cloudvisor.io/assets/img/invert.svg">
+<img align="right" width="250" src="https://www.cloudvisor.io/hubfs/raw_assets/public/Cloudvisor_May2020/images/invert.svg">
 
 # Cloudvisor integration IAM Role
 
