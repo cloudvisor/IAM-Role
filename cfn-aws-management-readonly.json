@@ -1,22 +1,28 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "Integration IAM Role for Cloudvisor [Read Only]",
+  "Description": "Integration IAM Role for Cloudvisor",
   "Metadata": {
     "AWS::CloudFormation::Interface": {
       "ParameterGroups": [
         {
-          "Label": {"default": "Cloudvior Customer Configuration"},
-          "Parameters": ["ClientUUIDToken"]
+          "Label": {
+            "default": "Cloudvisor Customer Configuration"
+          },
+          "Parameters": [
+            "ClientUUIDToken"
+          ]
         }
       ],
       "ParameterLabels": {
-        "ClientUUIDToken": {"default": "Cloudvisor Customer ID"}
+        "ClientUUIDToken": {
+          "default": "Cloudvisor Customer ID"
+        }
       }
     }
   },
   "Parameters": {
     "ClientUUIDToken": {
-      "Description": "[DO NOT MODIFY] The customer ID provided by Cloudvisor to indentify you as a client",
+      "Description": "[DO NOT MODIFY] The customer ID provided by Cloudvisor to identify you as a client",
       "Type": "String"
     }
   },
@@ -25,65 +31,130 @@
       "Type": "AWS::IAM::Role",
       "Properties": {
         "AssumeRolePolicyDocument": {
-          "Statement": [ {
-            "Action": "sts:AssumeRole",
-            "Effect": "Allow",
-            "Condition": {
-              "StringEquals": {
-                "sts:ExternalId": { "Ref": "ClientUUIDToken" }
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Condition": {
+                "StringEquals": {
+                  "sts:ExternalId": {
+                    "Ref": "ClientUUIDToken"
+                  }
+                }
+              },
+              "Principal": {
+                "AWS": [
+                  "arn:aws:iam::672188301118:root"
+                ]
               }
-            },
-            "Principal": {
-              "AWS": [
-                "arn:aws:iam::672188301118:root"
+            }
+          ]
+        },
+        "Policies": [
+          {
+            "PolicyName": "Cloudvisor-Policy",
+            "PolicyDocument": {
+              "Statement": [
+                {
+                  "Sid": "CloudvisorEC2Access",
+                  "Effect": "Allow",
+                  "Action": [
+                    "ec2:List*",
+                    "tag:GetResources",
+                    "tag:GetTagKeys",
+                    "tag:GetTagValues",
+                    "elasticloadbalancing:Describe*",
+                    "ec2:Describe*"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                },
+                {
+                  "Sid": "CloudvisorEC2AutoScalingAccess",
+                  "Effect": "Allow",
+                  "Action": [
+                    "autoscaling:Describe*"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                },
+                {
+                  "Sid": "CloudvisorOrganizationsAccess",
+                  "Effect": "Allow",
+                  "Action": [
+                    "organizations:List*",
+                    "organizations:Describe*"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                },
+                {
+                  "Sid": "CloudvisorCloudWatchAccess",
+                  "Effect": "Allow",
+                  "Action": [
+                    "cloudwatch:List*",
+                    "cloudwatch:Describe*",
+                    "cloudwatch:GetMetricStatistics"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                },
+                {
+                  "Sid": "CloudvisorSavingsPlansAccess",
+                  "Effect": "Allow",
+                  "Action": [
+                    "savingsplans:List*",
+                    "savingsplans:Describe*"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                },
+                {
+                  "Sid": "CloudvisorCostExplorerAccess",
+                  "Effect": "Allow",
+                  "Action": [
+                    "ce:List*",
+                    "ce:Describe*",
+                    "ce:Get*"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                },
+                {
+                  "Sid": "CloudvisorCloudTrailAccess",
+                  "Effect": "Allow",
+                  "Action": [
+                    "cloudtrail:List*",
+                    "cloudtrail:LookupEvents",
+                    "cloudtrail:Describe*",
+                    "cloudtrail:Get*"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
               ]
             }
-          } ]
-        },
-        "Policies": [ {
-          "PolicyName": "Cloudvisor-Policy",
-          "PolicyDocument": {
-            "Statement": [
-              {
-                "Sid": "CloudvisorEC2Access",
-                "Effect": "Allow",
-                "Action": [
-                  "ec2:Describe*",
-                  "ec2:List*",
-                  "tag:GetResources",
-                  "tag:GetTagKeys",
-                  "tag:GetTagValues",
-                  "autoscaling:Describe*",
-                  "elasticloadbalancing:Describe*"
-                ],
-                "Resource": [
-                  "*"
-                ]
-              },
-              {
-                "Sid": "CloudvisorReadonlyGeneralAccess",
-                "Effect": "Allow",
-                "Action": [
-                  "organizations:DescribeAccount",
-                  "cloudwatch:List*",
-                  "cloudwatch:Describe*",
-                  "cloudwatch:GetMetricStatistics",
-                  "ce:*"
-                ],
-                "Resource": [
-                  "*"
-                ]
-              }
-            ]
           }
-        }]
+        ]
       }
     }
   },
   "Outputs": {
     "CloudvisorRoleArn": {
       "Description": "The ARN of the role created for Cloudvisor integration",
-      "Value": { "Fn::GetAtt": ["CloudvisorIamRole", "Arn"] }
+      "Value": {
+        "Fn::GetAtt": [
+          "CloudvisorIamRole",
+          "Arn"
+        ]
+      }
     }
   }
 }
