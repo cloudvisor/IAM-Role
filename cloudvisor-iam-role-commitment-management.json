@@ -1,0 +1,56 @@
+{
+    "Statement": [
+        {
+            "Action": [
+                "ec2:Describe*",
+                "ec2:List*",
+                "ec2:CreateTags",
+                "ec2:DeleteTags",
+                "ec2:CreateReservedInstancesListing",
+                "ec2:PurchaseReservedInstancesOffering",
+                "ec2:PurchaseHostReservation",
+                "ec2:ModifyInstanceCreditSpecification",
+                "ec2:GetReservedInstancesExchangeQuote",
+                "ec2:AcceptReservedInstancesExchangeQuote",
+                "ec2:CancelReservedInstancesListing",
+                "ec2:ModifyReservedInstances",
+                "tag:GetResources",
+                "tag:GetTagKeys",
+                "tag:GetTagValues",
+                "autoscaling:Describe*",
+                "autoscaling:CreateOrUpdateTags",
+                "autoscaling:DeleteTags",
+                "elasticloadbalancing:Describe*",
+                "elasticloadbalancing:RemoveTags",
+                "elasticloadbalancing:AddTags"
+            ],
+            "Resource": [
+                "*"
+            ],
+            "Effect": "Allow",
+            "Sid": "CloudvisorEC2Access"
+        },
+        {
+            "Action": [
+                "organizations:List*",
+                "organizations:Describe*",
+                "cloudwatch:List*",
+                "cloudwatch:Describe*",
+                "cloudwatch:GetMetricStatistics",
+                "cloudtrail:LookupEvents",
+                "cloudtrail:List*",
+                "cloudtrail:Describe*",
+                "cloudtrail:Get*",
+                "savingsplans:*",
+                "ce:List*",
+                "ce:Describe*",
+                "ce:Get*"
+            ],
+            "Resource": [
+                "*"
+            ],
+            "Effect": "Allow",
+            "Sid": "CloudvisorReadonlyGeneralAccess"
+        }
+    ]
+}
